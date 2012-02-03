@@ -48,10 +48,10 @@
 		return this;
 	};
 		
-	//bind to pagecreate to automatically enhance date inputs	
-	$( ".ui-page" ).live( "pagecreate", function(){		
+	//enhance date inputs with the right value	
+    	jQuery(function($){        		
 		$( "input[type='date'], input:jqmData(type='date')", this ).each(function(){
-			$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true }) );
+			$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true, , defaultDate: $(this).attr( "value" ) ? $(this).attr( "value" ) : null }) );
 		});	
 	});
 })( jQuery );
