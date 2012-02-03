@@ -29,11 +29,13 @@
 			$( ".ui-datepicker-calendar a", dp ).buttonMarkup({corners: false, shadow: false}); 
 			$( ".ui-datepicker-calendar a.ui-state-active", dp ).addClass("ui-btn-active"); // selected date
 			$( ".ui-datepicker-calendar a.ui-state-highlight", dp ).addClass("ui-btn-up-e"); // today"s date
-	        $( ".ui-datepicker-calendar .ui-btn", dp ).each(function(){
-				var el = $(this);
-				// remove extra button markup - necessary for date value to be interpreted correctly
-				el.html( el.find( ".ui-btn-text" ).text() ); 
-	        });
+		        $( ".ui-datepicker-calendar .ui-btn", dp ).each(function(){
+					var el = $(this);
+					// remove extra button markup - necessary for date value to be interpreted correctly
+					el.html( el.find( ".ui-btn-text" ).text() ); 
+		        });
+	            $("input[data-type=date]").addClass("ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-focus");
+	            $("label").addClass("ui-input-text");            		        
 		};
 		
 		//update now
