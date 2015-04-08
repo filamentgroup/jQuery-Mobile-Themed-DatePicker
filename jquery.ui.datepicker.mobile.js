@@ -15,7 +15,7 @@
 		var dp = this;
 	
 		//call cached datepicker plugin
-		prevDp.call( this, options );
+		prevDp.apply( this, arguments );
 		
 		//extend with some dom manipulation to update the markup for jQM
 		//call immediately
@@ -49,7 +49,35 @@
 	//bind to pagecreate to automatically enhance date inputs	
 	$( ".ui-page" ).live( "pagecreate", function(){		
 		$( "input[type='date'], input:jqmData(type='date')", this ).each(function(){
-			$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true }) );
+			
+			 var date,
+			 	$this = $(this),
+				id = $this.attr('id'), // TODO what happens without id??
+				picker = $( "<div />" ).datepicker({ altField: "#"+id, showOtherMonths: true });
+				
+			//initialize
+			if (date = $this.val()){
+				picker.datepicker("setDate", date);
+			}
+			picker.hide();
+			$this.after( picker );
+			    
+			
+			//show when input is focused
+		    $this.focus(function() {
+		        picker.show('slow');
+		    });
+			
+			//hide when date selected
+			$( '.ui-datepicker-calendar a' ).live('click', function() { 
+			        picker.hide('slow');
+			});
+			
+			//update when input changes
+			$this.change(function(){
+				picker.datepicker("setDate", $(this).val());
+			}); 
+			
 		});	
 	});
 })( jQuery );
